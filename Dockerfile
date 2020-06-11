@@ -18,6 +18,8 @@ RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && install-php-ext
 	
 RUN	apt-get clean && \
 	printf '[PHP]\ndate.timezone = "Europe/Paris"\n' > /usr/local/etc/php/conf.d/tzone.ini && \
+	sed -i $'s#upload_max_filesize.*$#upload_max_filesize = 50M#' /usr/local/etc/php/php.ini-production && \
+	sed -i $'s#post_max_size .*$#post_max_size  = 50M#' /usr/local/etc/php/php.ini-production && \
 	rm -rf /var/www/html && mkdir /var/www/htdocs && \
 	sed -i "s#DocumentRoot /var/www/html#DocumentRoot /var/www/htdocs#g" /etc/apache2/sites-available/default-ssl.conf && \
 	a2enmod ssl && a2ensite default-ssl.conf
