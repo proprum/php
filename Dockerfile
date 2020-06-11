@@ -18,6 +18,8 @@ RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && install-php-ext
 	
 RUN	apt-get clean && \
 	printf '[PHP]\ndate.timezone = "Europe/Paris"\n' > /usr/local/etc/php/conf.d/tzone.ini && \
+	rm -rf /var/www/html && mkdir /var/www/htdocs && \
+	sed -i "s#DocumentRoot /var/www/html#DocumentRoot /var/www/htdocs#g" /etc/apache2/sites-available/default-ssl.conf && \
 	a2enmod ssl && a2ensite default-ssl.conf
 
 CMD  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/ssl-cert-snakeoil.key \ 
