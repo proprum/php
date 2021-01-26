@@ -14,7 +14,8 @@ RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && install-php-ext
 	mcrypt \
 	zip \
 	calendar \
-	intl 
+	intl \
+	mysqli
 	
 RUN	apt-get clean && \
 	printf '[PHP]\ndate.timezone = "Europe/Paris"\n' > /usr/local/etc/php/conf.d/tzone.ini && \
