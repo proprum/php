@@ -13,6 +13,7 @@ docker run -d \
   --name php-5.6 \
   -v ~/tzfile.ini:/usr/local/etc/php/conf.d/tzone.ini \
   -v ~/mysite_apache.conf:/etc/apache2/sites-enabled/mysite_apache.conf \
+  -v ~/certs:/certs \
   -p 80:80 \
   -p 443:443 \
   proprum:php
