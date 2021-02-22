@@ -8,6 +8,7 @@ RUN printf "[Date]\ndate.timezone = 'Europe/Paris'\n" > /usr/local/etc/php/conf.
 RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && install-php-extensions \
 	gd \
 	imagick \
+	pgsql \
 	ldap \
 	mcrypt \
 	zip \
