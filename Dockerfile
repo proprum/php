@@ -18,8 +18,8 @@ RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && install-php-ext
 	
 RUN	apt-get clean && \
 	sed -i $'s#upload_max_filesize.*$#upload_max_filesize = 50M#' /usr/local/etc/php/php.ini-production && \
-	sed -i $'s#post_max_size .*$#post_max_size  = 50M#' /usr/local/etc/php/php.ini-production 
+	sed -i $'s#post_max_size .*$#post_max_size  = 50M#' /usr/local/etc/php/php.ini-production && \
+	a2enmod ssl
 
 CMD  apache2-foreground
 
-EXPOSE 80
