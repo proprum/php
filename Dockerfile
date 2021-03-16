@@ -21,5 +21,7 @@ RUN	apt-get clean && \
 	sed -i $'s#post_max_size .*$#post_max_size  = 50M#' /usr/local/etc/php/php.ini-production && \
 	a2enmod ssl
 
-CMD  apache2-foreground
+COPY start.sh /root/start.sh
+
+CMD ["/bin/bash", "/root/start.sh"]
 
