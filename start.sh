@@ -47,6 +47,11 @@ if [ ! -z "$setted" ] ; then
   else 
     sed -i "s#\(\s*SSLCertificateKeyFile\).*#\#\0#" /etc/apache2/sites-enabled/default-ssl.conf 
   fi
+  
+  if [ ! -z "$ROOTDIR" ] ; then 
+    sed "s#\(\s*DocumentRoot\s\).*#\1$ROOTDIR#" /etc/apache2/sites-enabled/*.conf
+  fi 
+  
 fi
 
 apache2-foreground
