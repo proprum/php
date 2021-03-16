@@ -1,20 +1,24 @@
 # php
 
-Need file timezone :
+Override default (Europe/Paris) timezone : `-v ~/tzone.ini:/usr/local/etc/php/conf.d/tzone.ini`
 
-    printf '[PHP]\ndate.timezone = "Europe/Paris"\n' > tzfile.ini
+## HTTPS ##
 
-and use it to `/usr/local/etc/php/conf.d/tzone.ini`
+Drop your own certificate + key on certs : `-v ~/certs:/certs` No need to configure, automatically integrated
 
-Add some apache config file to `/etc/apache2/sites-enabled/`\*.conf, using your own paths to cert files
+If you don't do provide your certs, it will auto-generate one self-signed, using `SERVERNAME` provided CN
+
+
+
+## RUN ##
 
 ```
 docker run -d \
-  --name php-5.6 \
+  --name php \
   -v ~/tzfile.ini:/usr/local/etc/php/conf.d/tzone.ini \
-  -v ~/mysite_apache.conf:/etc/apache2/sites-enabled/mysite_apache.conf \
   -v ~/certs:/certs \
+  -e SERVERNAME=example.org
   -p 80:80 \
   -p 443:443 \
-  proprum:php
+  proprum/php:$VERS
 ```
